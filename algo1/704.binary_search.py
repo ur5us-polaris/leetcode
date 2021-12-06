@@ -6,10 +6,7 @@ def search(nums: List[int], target: int) -> int:
     left = 0
     right = len(nums) - 1
     while left <= right:
-        print(f'{left=}')
-        print(f'{right=}')
         mid = floor((right + left) / 2)
-        print(f'{mid=}')
         if nums[mid] == target:
             return mid
         if nums[mid] < target:
