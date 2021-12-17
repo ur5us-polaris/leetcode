@@ -4,7 +4,7 @@ class Solution:
         grid = [''] * numRows
         curr_row = 0
         is_down = 1
-        for i, c in enumerate(s):
+        for c in s:
             grid[curr_row] += c
             if is_down == 1:
                 if curr_row >= numRows - 1:
