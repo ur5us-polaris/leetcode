@@ -24,28 +24,48 @@ class ListNode:
         self.next = next
 
 
+# Pythonic, somewhat cheaty
+# class Solution:
+#     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+#         # Iterate the list till the end
+#         # For each node, keep a pointer in an array
+#         # When iteration finished, go to nth - 1 from the end and set its next to nth + 1
+#         curr = head
+#         temp_list: List[ListNode] = []
+#         while curr:
+#             temp_list.append(curr)
+#             curr = curr.next
+#         if temp_list[len(temp_list)-n] == head:
+#             head = head.next
+#         else:
+#             temp_list[len(temp_list)-n-1].next = temp_list[len(temp_list)-n].next
+#         return head
 
+# General 2 pointers solution
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        # Iterate the list till the end
-        # For each node, keep a pointer in an array
-        # When iteration finished, go to nth - 1 from the end and set its next to nth + 1
         curr = head
-        temp_list: List[ListNode] = []
-        while curr:
-            temp_list.append(curr)
+        end = head
+        prev = None
+        for i in range(n):
+            end = end.next
+        while end:
+            prev = curr
             curr = curr.next
-        if temp_list[len(temp_list)-n] == head:
-            head = head.next
+            end = end.next
+        if curr == head:
+            head = curr.next
         else:
-            temp_list[len(temp_list)-n-1].next = temp_list[len(temp_list)-n].next
+            prev.next = curr.next
         return head
 
 
-builder = ListNodeListBuilder().append(1).append(2).append(3).append(4).append(5)
+# builder = ListNodeListBuilder().append(1).append(2).append(3).append(4).append(5)
+builder = ListNodeListBuilder().append(1).append(2)#.append(3).append(4).append(5)
+# builder = ListNodeListBuilder().append(1)#.append(2).append(3).append(4).append(5)
 s = Solution()
 
-curr = s.removeNthFromEnd(builder.head, 2)
+curr = s.removeNthFromEnd(builder.head, 1)
 while curr:
     print(curr.val)
     curr = curr.next
